@@ -1,0 +1,232 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+}
+
+.container {
+  position: relative;
+  width: 365px;
+  height: 588px;
+  background: linear-gradient(180deg, #eeeeee 0%, #ffffff 100%);
+  border: 1px solid black; /* retirar */
+}
+
+.container p {
+  top: 193px;
+  left: 56px;
+  position: absolute;
+  width: 248px;
+  height: 35px;
+
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: -1px;
+
+  color: #ff6600;
+}
+
+.titulo {
+  top: 62px;
+  left: 58px;
+  position: absolute;
+  width: 248px;
+  height: 35px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  letter-spacing: -1px;
+  background: linear-gradient(174.92deg, #ef6c00 18.47%, #db6300 36.57%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* text-fill-color: transparent; */
+}
+
+.retangulo {
+  top: 102px;
+  left: 80px;
+  position: absolute;
+  width: 205px;
+  height: 1px;
+  background: #cfcfcf;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+.display {
+  position: relative;
+  top: 244px;
+  left: 155px;
+  width: 55.16px;
+  height: 100px;
+  /* background-color: lightblue; */
+}
+
+.digitA {
+  position: absolute;
+  top: 0px;
+  left: 7.58px;
+  width: 40px;
+  height: 10px;
+  background: #262a34;
+  border-radius: 1vh;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+.digitD {
+  position: absolute;
+  top: 90px;
+  left: 7.58px;
+  width: 40px;
+  height: 10px;
+  background: #262a34;
+  border-radius: 1vh;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+.digitG {
+  position: absolute;
+  top: 45px;
+  left: 7.58px;
+  width: 40px;
+  height: 10px;
+  background: #262a34;
+  border-radius: 1vh;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+.digitC {
+  position: absolute;
+  top: 52.5px;
+  left: 45.16px;
+  width: 10px;
+  height: 40px;
+  background: #dddddd;
+  border-radius: 1vh;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+.digitE {
+  position: absolute;
+  top: 52.5px;
+  left: 0px;
+  width: 10px;
+  height: 40px;
+  background: #262a34;
+  border-radius: 1vh;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+.digitB {
+  position: absolute;
+  top: 7.5px;
+  left: 45.16px;
+  width: 10px;
+  height: 40px;
+  background: #262a34;
+  border-radius: 1vh;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+.digitF {
+  position: absolute;
+  top: 7.5px;
+  left: 0px;
+  width: 10px;
+  height: 40px;
+  background: #dddddd;
+  border-radius: 1vh;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+.nova-partida {
+  top: 400px;
+  left: 118px;
+  position: absolute;
+  width: 130px;
+  height: 42px;
+  background: linear-gradient(180deg, #434854 0%, #9e9e9e 100%);
+  border-radius: 4px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  color: #ffffff;
+  border-style: none;
+}
+
+.formBox {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 515px;
+  left: 33px;
+  width: 298px;
+  height: 42px;
+}
+
+.formBox input {
+  box-sizing: border-box;
+  width: 217px;
+  height: 42px;
+  background: #ffffff;
+  border: 1px solid #ff6600;
+  border-radius: 4px;
+}
+
+.formBox input::placeholder {
+  top: 14px;
+  left: 12px;
+  position: absolute;
+  width: 80px;
+  height: 14px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #9e9e9e;
+}
+
+.formBox input[type='number'] {
+  width: 14px;
+  height: 14px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #222222;
+  box-sizing: border-box;
+  width: 217px;
+  height: 42px;
+  padding-left: 12px;
+  background: #ffffff;
+  border: 1px solid #ff6600;
+  border-radius: 4px;
+}
+
+.formBox button {
+  width: 70px;
+  height: 42px;
+  background: linear-gradient(180deg, #ef6c00 0%, #c0661c 100%);
+  border-radius: 4px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  color: #ffffff;
+  border-style: none;
+}
