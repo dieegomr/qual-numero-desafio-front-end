@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
     <title>Document</title>
   </head>
   <body>
@@ -12,45 +13,50 @@
       <h1 class="titulo">QUAL É O NÚMERO?</h1>
       <div class="retangulo"></div>
       <p>É maior!</p>
-      <div class="container-display">
+      <div id="container-display">
         <div class="display-centena">
           <!-- <div class="lineH"></div>
-        <div class="lineV"></div> -->
-          <div class="digitA"></div>
-          <div class="digitB"></div>
-          <div class="digitC"></div>
-          <div class="digitD"></div>
-          <div class="digitE"></div>
-          <div class="digitF"></div>
-          <div class="digitG-1"></div>
-          <div class="digitG-2"></div>
+            <div class="lineV"></div> -->
+          <div class="segA centena"></div>
+          <div class="segB centena"></div>
+          <div class="segC centena"></div>
+          <div class="segD centena"></div>
+          <div class="segE centena"></div>
+          <div class="segF centena"></div>
+          <div class="segG-1 centena"></div>
+          <div class="segG-2 centena"></div>
         </div>
         <div class="display-dezena">
           <!-- <div class="lineH"></div>
         <div class="lineV"></div> -->
-          <div class="digitA"></div>
-          <div class="digitB"></div>
-          <div class="digitC"></div>
-          <div class="digitD"></div>
-          <div class="digitE"></div>
-          <div class="digitF"></div>
-          <div class="digitG-1"></div>
-          <div class="digitG-2"></div>
+          <div class="segA dezena"></div>
+          <div class="segB dezena"></div>
+          <div class="segC dezena"></div>
+          <div class="segD dezena"></div>
+          <div class="segE dezena"></div>
+          <div class="segF dezena"></div>
+          <div class="segG-1 dezena"></div>
+          <div class="segG-2 dezena"></div>
         </div>
         <div class="display-unidade">
           <!-- <div class="lineH"></div>
         <div class="lineV"></div> -->
-          <div class="digitA"></div>
-          <div class="digitB"></div>
-          <div class="digitC"></div>
-          <div class="digitD"></div>
-          <div class="digitE"></div>
-          <div class="digitF"></div>
-          <div class="digitG-1"></div>
-          <div class="digitG-2"></div>
+          <div class="segA unidade"></div>
+          <div class="segB unidade"></div>
+          <div class="segC unidade"></div>
+          <div class="segD unidade"></div>
+          <div class="segE unidade"></div>
+          <div class="segF unidade"></div>
+          <div class="segG-1 unidade"></div>
+          <div class="segG-2 unidade"></div>
         </div>
       </div>
-      <button class="nova-partida">NOVA PARTIDA</button>
+      <button class="nova-partida">
+        <svg class="refresh-icon">
+          <use href="src/img/icon-search.svg"></use>
+        </svg>
+        <span>NOVA PARTIDA</span>
+      </button>
       <!-- ACRESCENTAR ICONE NO BOTÃO-->
       <form class="formBox">
         <input type="number" placeholder="Digite o palpite" />

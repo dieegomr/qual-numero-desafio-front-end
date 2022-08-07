@@ -3,6 +3,29 @@
   padding: 0;
   box-sizing: border-box;
 }
+:root {
+  --segA-unidade-color: #ff6600;
+  --segB-unidade-color: #ff6600;
+  --segC-unidade-color: #ff6600;
+  --segD-unidade-color: #ff6600;
+  --segE-unidade-color: #ff6600;
+  --segF-unidade-color: #ff6600;
+  --segG-unidade-color: #ff6600;
+  --segA-dezena-color: #ff6600;
+  --segB-dezena-color: #ff6600;
+  --segC-dezena-color: #ff6600;
+  --segD-dezena-color: #ff6600;
+  --segE-dezena-color: #ff6600;
+  --segF-dezena-color: #ff6600;
+  --segG-dezena-color: #ff6600;
+  --segA-centena-color: #ff6600;
+  --segB-centena-color: #ff6600;
+  --segC-centena-color: #ff6600;
+  --segD-centena-color: #ff6600;
+  --segE-centena-color: #ff6600;
+  --segF-centena-color: #ff6600;
+  --segG-centena-color: #ff6600;
+}
 
 body {
   height: 100vh;
@@ -62,7 +85,8 @@ body {
   background: #cfcfcf;
   transform: matrix(1, 0, 0, -1, 0, 0);
 }
-.container-display {
+
+#container-display {
   position: absolute;
   display: flex;
   justify-content: space-between;
@@ -100,7 +124,7 @@ body {
   margin-left: 4.5px;
 }
 
-.digitA {
+.segA {
   position: absolute;
   top: 0px;
   left: 2.23px;
@@ -108,7 +132,6 @@ body {
   height: 0px;
   width: 50.73px;
   height: 0px;
-  border-top: 10.99px solid #262a34;
   border-right: 11px solid transparent;
   border-left: 11px solid transparent;
   border-top-left-radius: 3px;
@@ -133,7 +156,7 @@ body {
   background-color: greenyellow;
 } */
 
-.digitB {
+.segB {
   position: absolute;
   top: 1px;
   left: 43.42px;
@@ -141,47 +164,43 @@ body {
   height: 49px;
   border-top: 11px solid transparent;
   border-bottom: 8px solid transparent;
-  border-right: 11.74px solid #262a34;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 8px;
 }
 
-.digitG-1 {
+.segG-1 {
   position: absolute;
   top: 44.1px;
   left: 5px;
   width: 45.9px;
   height: 0px;
-  border-bottom: 5.9px solid #dddddd;
   border-right: 7px solid transparent;
   border-left: 7px solid transparent;
 }
 
-.digitG-2 {
+.segG-2 {
   position: absolute;
   top: 50px;
   left: 5px;
   width: 45.9px;
   height: 0px;
-  border-top: 5.9px solid #dddddd;
   border-right: 7px solid transparent;
   border-left: 7px solid transparent;
 }
 
-.digitD {
+.segD {
   position: absolute;
   top: 89.1px;
   left: 2.23px;
   width: 50.73px;
   height: 0px;
-  border-bottom: 10.99px solid #262a34;
   border-right: 11px solid transparent;
   border-left: 11px solid transparent;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
 }
 
-.digitC {
+.segC {
   position: absolute;
   top: 50px;
   left: 43.42px;
@@ -189,12 +208,11 @@ body {
   height: 49px;
   border-top: 8px solid transparent;
   border-bottom: 11.74px solid transparent;
-  border-right: 11.74px solid #262a34;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 5px;
 }
 
-.digitE {
+.segE {
   position: absolute;
   top: 50px;
   left: 0px;
@@ -202,12 +220,11 @@ body {
   height: 49px;
   border-top: 8px solid transparent;
   border-bottom: 11.74px solid transparent;
-  border-left: 11.74px solid #262a34;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 5px;
 }
 
-.digitF {
+.segF {
   position: absolute;
   top: 1px;
   left: 0px;
@@ -215,7 +232,6 @@ body {
   height: 49px;
   border-top: 11px solid transparent;
   border-bottom: 8px solid transparent;
-  border-left: 11.74px solid #262a34;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 8px;
 }
@@ -235,6 +251,8 @@ body {
   line-height: 14px;
   color: #ffffff;
   border-style: none;
+  display: flex;
+  justify-content: space-between;
 }
 
 .formBox {
@@ -300,4 +318,111 @@ body {
   line-height: 14px;
   color: #ffffff;
   border-style: none;
+}
+
+.refresh-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.display-unidade .segA {
+  border-top: 10.99px solid var(--segA-unidade-color);
+}
+
+.display-unidade .segB {
+  border-right: 11.74px solid var(--segB-unidade-color);
+}
+
+.display-unidade .segC {
+  border-right: 11.74px solid var(--segC-unidade-color);
+}
+
+.display-unidade .segD {
+  border-bottom: 10.99px solid var(--segD-unidade-color);
+}
+
+.display-unidade .segE {
+  border-left: 11.74px solid var(--segE-unidade-color);
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 5px;
+}
+
+.display-unidade .segF {
+  border-left: 11.74px solid var(--segF-unidade-color);
+}
+
+.display-unidade .segG-1 {
+  border-bottom: 5.9px solid var(--segG-unidade-color);
+}
+
+.display-unidade .segG-2 {
+  border-top: 5.9px solid var(--segG-unidade-color);
+}
+
+.display-dezena .segA {
+  border-top: 10.99px solid var(--segA-dezena-color);
+}
+
+.display-dezena .segB {
+  border-right: 11.74px solid var(--segB-dezena-color);
+}
+
+.display-dezena .segC {
+  border-right: 11.74px solid var(--segC-dezena-color);
+}
+
+.display-dezena .segD {
+  border-bottom: 10.99px solid var(--segD-dezena-color);
+}
+
+.display-dezena .segE {
+  border-left: 11.74px solid var(--segE-dezena-color);
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 5px;
+}
+
+.display-dezena .segF {
+  border-left: 11.74px solid var(--segF-dezena-color);
+}
+
+.display-dezena .segG-1 {
+  border-bottom: 5.9px solid var(--segG-dezena-color);
+}
+
+.display-dezena .segG-2 {
+  border-top: 5.9px solid var(--segG-dezena-color);
+}
+
+.display-centena .segA {
+  border-top: 10.99px solid var(--segA-centena-color);
+}
+
+.display-centena .segB {
+  border-right: 11.74px solid var(--segB-centena-color);
+}
+
+.display-centena .segC {
+  border-right: 11.74px solid var(--segC-centena-color);
+}
+
+.display-centena .segD {
+  border-bottom: 10.99px solid var(--segD-centena-color);
+}
+
+.display-centena .segE {
+  border-left: 11.74px solid var(--segE-centena-color);
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 5px;
+}
+
+.display-centena .segF {
+  border-left: 11.74px solid var(--segF-centena-color);
+}
+
+.display-centena .segG-1 {
+  border-bottom: 5.9px solid var(--segG-centena-color);
+}
+
+.display-centena .segG-2 {
+  border-top: 5.9px solid var(--segG-centena-color);
 }
