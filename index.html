@@ -5,16 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
+
     <title>Document</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container-externo">
       <h1 class="titulo">QUAL É O NÚMERO?</h1>
       <div class="retangulo"></div>
-      <p>É maior!</p>
-      <div id="container-display">
-        <div class="display-centena">
+      <p class="mensagem">É maior!</p>
+      <div class="container-display">
+        <div class="display-7seg display-centena">
           <!-- <div class="lineH"></div>
             <div class="lineV"></div> -->
           <div class="segA centena"></div>
@@ -26,7 +26,7 @@
           <div class="segG-1 centena"></div>
           <div class="segG-2 centena"></div>
         </div>
-        <div class="display-dezena">
+        <div class="display-7seg display-dezena">
           <!-- <div class="lineH"></div>
         <div class="lineV"></div> -->
           <div class="segA dezena"></div>
@@ -38,7 +38,7 @@
           <div class="segG-1 dezena"></div>
           <div class="segG-2 dezena"></div>
         </div>
-        <div class="display-unidade">
+        <div class="display-7seg display-unidade">
           <!-- <div class="lineH"></div>
         <div class="lineV"></div> -->
           <div class="segA unidade"></div>
@@ -59,9 +59,10 @@
       </button>
       <!-- ACRESCENTAR ICONE NO BOTÃO-->
       <form class="formBox">
-        <input type="number" placeholder="Digite o palpite" />
-        <button>Enviar</button>
+        <input id="input" type="number" placeholder="Digite o palpite" />
+        <button class="button">Enviar</button>
       </form>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>
