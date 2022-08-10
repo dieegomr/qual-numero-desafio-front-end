@@ -7,6 +7,8 @@ let mensagem = document.querySelector('.mensagem');
 
 let estado = '#262A34';
 let secretNumber = '';
+let corpadrao = '#dddddd';
+// let html = '';
 
 const HTML = `
 <div class="display-7seg display-centena">
@@ -45,23 +47,39 @@ const HTML3 = `
   </div`;
 
 const getSecretNumber = async function () {
-  const resp = await fetch(
-    'https://us-central1-ss-devops.cloudfunctions.net/rand?min=1&max=300'
-  );
-  const data = await resp.json();
-  secretNumber = data.value;
-  console.log('novo numero secreto');
+  try {
+    const resp = await fetch(
+      'https://us-central1-ss-devops.cloudfunctions.net/rand?min=1&max=300'
+    );
+    if (!resp.ok) throw new Error(resp.status);
+    console.log(resp);
+    const data = await resp.json();
+    secretNumber = data.value;
+    console.log('novo numero secreto');
+  } catch (err) {
+    estado = 'rgba(204, 51, 0, 1)';
+    mensagem.classList.add('erro');
+    mensagem.textContent = 'ERRO';
+    novaPartidaButton.classList.toggle('hidden');
+    segmento.setProperty('--form-button-color', '#dddddd');
+    segmento.setProperty('--form-border-color', '#CFCFCF');
+    segmento.setProperty('--form-background-color', '#F5F5F5');
+    displayOnScreen(err.message);
+  }
 };
 
 getSecretNumber();
 
-const onClickHandler = (event) => {
+const eviarHandler = (event) => {
   event.preventDefault();
-  let enteredNumber = input.value;
-  checkSecretNumber(enteredNumber);
-  displayOnScreen(enteredNumber);
-  input.value = '';
-  console.log('secret', secretNumber);
+  if (estado === '#262A34') {
+    let enteredNumber = input.value;
+    checkSecretNumber(enteredNumber);
+    displayOnScreen(enteredNumber);
+    input.value = '';
+    console.log('secret', secretNumber);
+    console.log('cliquei');
+  }
 };
 
 const novaPartidaHandler = () => {
@@ -105,12 +123,7 @@ const binarioParaDisplay = (num) => {
   return [seg_a, seg_b, seg_c, seg_d, seg_e, seg_f, seg_g];
 };
 
-button.addEventListener('click', onClickHandler);
-novaPartidaButton.addEventListener('click', novaPartidaHandler);
-
 /* seletor: centena = 0, dezena = 1, unidade = 2*/
-
-let corpadrao = '#dddddd';
 
 const displayOn7Seg = (numBinario, seletor, estado) => {
   numBinario.forEach((num, index) => {
@@ -121,9 +134,6 @@ const displayOn7Seg = (numBinario, seletor, estado) => {
     }
   });
 };
-
-// let arrteste = [];
-let html = '';
 
 const displayOnScreen = (enteredNumber) => {
   const numero = enteredNumber.split('');

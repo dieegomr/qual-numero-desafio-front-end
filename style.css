@@ -109,6 +109,10 @@ body {
   color: rgba(50, 191, 0, 1);
 }
 
+.erro {
+  color: rgba(204, 51, 0, 1);
+}
+
 .container-display {
   display: flex;
   margin-top: 16px;
