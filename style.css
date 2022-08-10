@@ -105,7 +105,7 @@ body {
   margin-top: 71px;
 }
 
-.correct {
+.ganhou {
   color: rgba(50, 191, 0, 1);
 }
 
@@ -313,9 +313,40 @@ body {
   box-sizing: border-box;
   width: 217px;
   height: 42px;
+  border-radius: 4px;
+}
+
+.formBox button {
+  width: 70px;
+  height: 42px;
+  background: var(--form-button-color);
+  border-radius: 4px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  color: #ffffff;
+  border-style: none;
+}
+
+/* voltar aqui */
+.input.input.jogando {
   background: var(--form-background-color);
   border: 1px solid var(--form-border-color);
-  border-radius: 4px;
+}
+
+input.input.pausado {
+  background: #f5f5f5;
+  border: 1px solid #cfcfcf;
+}
+
+button.enviar_button.pausado {
+  background: #dddddd;
+}
+
+button.enviar_button.jogando {
+  background: linear-gradient(180deg, #ef6c00 0%, #c0661c 100%);
 }
 
 .formBox input::placeholder {
@@ -342,20 +373,6 @@ body {
   width: 217px;
   height: 42px;
   padding-left: 12px;
-}
-
-.formBox button {
-  width: 70px;
-  height: 42px;
-  background: var(--form-button-color);
-  border-radius: 4px;
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 14px;
-  color: #ffffff;
-  border-style: none;
 }
 
 .display-unidade .segA {
