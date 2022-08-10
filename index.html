@@ -12,11 +12,9 @@
     <div class="container-externo">
       <h1 class="titulo">QUAL É O NÚMERO?</h1>
       <div class="retangulo"></div>
-      <p class="mensagem">É maior!</p>
+      <p class="mensagem"></p>
       <div class="container-display">
-        <div class="display-7seg display-centena">
-          <!-- <div class="lineH"></div>
-            <div class="lineV"></div> -->
+        <!-- <div class="display-7seg display-centena">
           <div class="segA centena"></div>
           <div class="segB centena"></div>
           <div class="segC centena"></div>
@@ -27,8 +25,6 @@
           <div class="segG-2 centena"></div>
         </div>
         <div class="display-7seg display-dezena">
-          <!-- <div class="lineH"></div>
-        <div class="lineV"></div> -->
           <div class="segA dezena"></div>
           <div class="segB dezena"></div>
           <div class="segC dezena"></div>
@@ -39,8 +35,6 @@
           <div class="segG-2 dezena"></div>
         </div>
         <div class="display-7seg display-unidade">
-          <!-- <div class="lineH"></div>
-        <div class="lineV"></div> -->
           <div class="segA unidade"></div>
           <div class="segB unidade"></div>
           <div class="segC unidade"></div>
@@ -49,17 +43,14 @@
           <div class="segF unidade"></div>
           <div class="segG-1 unidade"></div>
           <div class="segG-2 unidade"></div>
-        </div>
+        </div> -->
       </div>
-      <button class="nova-partida">
-        <svg class="refresh-icon">
-          <use href="src/img/icon-search.svg"></use>
-        </svg>
-        <span>NOVA PARTIDA</span>
+      <button class="nova-partida_button hidden">
+        <img src="src/img/icon-search.png" alt="search-icon" />NOVA PARTIDA
       </button>
       <!-- ACRESCENTAR ICONE NO BOTÃO-->
       <form class="formBox">
-        <input id="input" type="number" placeholder="Digite o palpite" />
+        <input id="input" type="text" placeholder="Digite o palpite" />
         <button class="button">Enviar</button>
       </form>
     </div>
