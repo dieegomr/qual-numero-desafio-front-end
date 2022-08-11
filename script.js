@@ -1,3 +1,10 @@
+'use strict';
+
+/**
+ * @fileoverview O programa consiste em um jogo onde recebe-se um número através de uma requisição e o usuário deve acertar este número através de palpites. Ao errar um palpite, irá ser informado se o número obtido é maior ou menor do que o palpite feito. O palpite realizado ou status code de erro de requisição são exibidos na tela no formato de LED de 7 segmentos. O palpite é recibido através campo de texto, que é processado apenas quando o botão ENVIAR é clicado.
+ * @author Diego Mendes Rocha
+ */
+
 const input = document.querySelector('.input');
 const styleVariaveis = document.documentElement.style;
 const enviarButton = document.querySelector('.enviar_button');
@@ -5,10 +12,39 @@ const displayContainer = document.querySelector('.container-display');
 const novaPartidaButton = document.querySelector('.nova-partida_button');
 let mensagem = document.querySelector('.mensagem');
 
-let estado = { sitacao: '', cor: '', motivo: 'ok' };
-let secretNumber = '';
+/**
+ * Objeto que armazena o estado do jogo
+ * @type {{situacao: string, cor: string, motivo: string}}
+ */
+let estado = { situacao: '', cor: '', motivo: 'ok' };
+
+/**
+ * Número secreto recebido através da requisição API
+ * @type {string}
+ */
+let numeroSecreto = '';
+
+/**
+ * Cor padrão do segmento do display de 7 segmentos
+ * @type {string}
+ */
 let corPadrao = '#dddddd';
 
+/**
+ * Limite inferior do número secreto. Configurada para o modo padrão de jogo
+ * @type {string}
+ */
+const limiteInferior = '1';
+/**
+ * Limite superior do número secreto. Configurada para o modo padrão de jogo
+ * @type {string}
+ */
+const limiteSuperior = '300';
+
+/**
+ * HTML para um dos displays de 7 segmentos
+ * @type {string}
+ */
 const HTML = `
 <div class="display-7seg display-centena">
   <div class="segA centena"></div>
@@ -21,6 +57,10 @@ const HTML = `
   <div class="segG-2 centena"></div>
 </div>`;
 
+/**
+ * HTML para um dos displays de 7 segmentos
+ * @type {string}
+ */
 const HTML2 = `
 <div class="display-7seg display-dezena">
   <div class="segA dezena"></div>
@@ -33,6 +73,10 @@ const HTML2 = `
   <div class="segG-2 dezena"></div>
 </div>`;
 
+/**
+ * HTML para um dos displays de 7 segmentos
+ * @type {string}
+ */
 const HTML3 = `
   <div class="display-7seg display-unidade">
     <div class="segA unidade"></div>
@@ -45,6 +89,9 @@ const HTML3 = `
     <div class="segG-2 unidade"></div>
   </div`;
 
+/**
+ * Função que Habilita ou Desabilita o formulário manipulando as classes CSS. Classe jogando quando o jogo está em andamento e Classe pausado quando o usuário acertou o número ou houve algum erro
+ */
 const habilitarDesabilitaFormulario = () => {
   input.classList.toggle('jogando');
   input.classList.toggle('pausado');
@@ -52,105 +99,117 @@ const habilitarDesabilitaFormulario = () => {
   enviarButton.classList.toggle('pausado');
 };
 
-// Condições iniciais do jogo
-
+/**
+ * Função que coloca o jogo em condições iniciais
+ */
 const novaPartidaHandler = () => {
-  // Retira o estado correct da mensagem
-  mensagem.classList.remove(estado.motivo);
+  renderizarMensagem('', estado.motivo, 'remove');
 
-  // Mudando estado para ok
-  estado.cor = '#262A34';
-  estado.sitacao = 'jogando';
-  estado.motivo = 'ok';
+  mudarEstadoJogo('#262A34', 'jogando', 'ok');
 
-  // Requisita um novo número
-  getSecretNumber();
+  getSecretNumber(limiteInferior, limiteSuperior);
 
-  // Coloca o zero na tela
   renderizarNumeroTela('0');
 
-  // Limpa a mensagem
-  mensagem.textContent = '';
-
-  // Oculta o botão Nova Partida
   novaPartidaButton.classList.toggle('hidden');
 
-  // Habilita formulário enviar
   habilitarDesabilitaFormulario();
 };
 
-// Requisição do número secreto
-const getSecretNumber = async function () {
+/**
+ * Função que muda o estado do jogo
+ * @param {string} cor cor usada nos seguimentos
+ * @param {string} situacao Jogo pausado ou em andamento
+ * @param {string} motivo Descreve o motivo da situação do jogo
+ */
+const mudarEstadoJogo = (cor, situacao, motivo) => {
+  estado.cor = cor;
+  estado.situacao = situacao;
+  estado.motivo = motivo;
+};
+
+/**
+ * Função que faz a requisição do número aleatório e trata os possíveis erros
+ * @param {string} min Menor numero que pode ser gerado
+ * @param {string} max Maior número que pode ser gerado
+ * @throws Gera erro se acontecer algo de errado com a requisição
+ */
+const getSecretNumber = async function (min, max) {
   try {
     const resp = await fetch(
-      'https://us-central1-ss-devops.cloudfunctions.net/rand?min=1&max=300'
+      `https://us-central1-ss-devops.cloudfunctions.net/rand?min=${min}&max=${max}`
     );
-    console.log(resp);
-    // Confere se tem erro
+
     if (!resp.ok) throw new Error(resp.status);
 
     const data = await resp.json();
 
-    // Armazena o numero secreto em uma variável
-    secretNumber = data.value;
+    numeroSecreto = data.value;
   } catch (err) {
-    // Mudando estado para erro
-    estado.cor = 'rgba(204, 51, 0, 1)';
-    estado.sitacao = 'pausado';
-    estado.motivo = 'erro';
+    mudarEstadoJogo('rgba(204, 51, 0, 1)', 'pausado', 'erro');
 
-    // Adiciona classe erro
-    mensagem.classList.add(estado.motivo);
+    renderizarMensagem('ERRO', estado.motivo, 'add');
 
-    // Altera a mensagem
-    mensagem.textContent = 'ERRO';
-
-    // Renderiza botão nova partida
     novaPartidaButton.classList.toggle('hidden');
 
-    // Desabilita formulário
     habilitarDesabilitaFormulario();
 
-    // Renderiza erro na tela
     renderizarNumeroTela(err.message);
   }
 };
 
-// Ações ao enviar número
+/**
+ * Renderiza a mensagem em cima do LED
+ * @param {string} texto texto que será renderizado
+ * @param {string} estilo determina o estilo aplicado
+ * @param {string} acao determina se estilo será removido ou adicionado
+ */
+const renderizarMensagem = (texto, estilo, acao) => {
+  mensagem.textContent = texto;
+  if (acao === 'add') mensagem.classList.add(estilo);
+  if (acao === 'remove') mensagem.classList.remove(estilo);
+};
+
+/**
+ * Função que trata o numero digitado no input e passa como argumento para as funções "compararComNumeroSecreto" e "renderizarNumeroTela"
+ * @param {object} event
+ * @returns
+ */
 const enviarHandler = (event) => {
   event.preventDefault();
 
-  // Converir se o jogo esta jogável
-  if (estado.sitacao !== 'jogando') return;
+  if (estado.situacao !== 'jogando') return;
 
-  // Armazena o valor digitado
-  let enteredNumber = input.value;
+  let numeroDigitado = input.value;
 
-  // Confere se o numero digitado é correto
-  checkSecretNumber(enteredNumber);
+  comopararComNumeroSecreto(numeroDigitado);
 
-  // Mostra o número na tela
-  renderizarNumeroTela(enteredNumber);
+  renderizarNumeroTela(numeroDigitado);
 
-  // Apaga informação do input
   input.value = '';
-
-  ///////////////////////////////// APAGAR
-  console.log('secret', secretNumber);
-  console.log('cliquei');
-  //////////////////////////////////////////
 };
 
-// na saida, tenho um numero binario em formato de array
-const decimalParaBinario = (numeroString) => {
+/**
+ * Função que converte um número inteiro para um número binário
+ * @param {string} numeroString numero que está no formato string
+ * @returns {array} numero binario de 4 bits em formato de array
+ */
+const inteiroParaBinario = (numeroString) => {
   let numeroInteiro = parseInt(numeroString);
   let numeroBinario = numeroInteiro.toString(2);
   let arrBinarioStr = numeroBinario.padStart(4, '0').split('');
   return arrBinarioStr.map((str) => Number(str));
 };
 
+/**
+ * Função que converte um número decimal para um display de 7 segmentos.
+ * Utilizei conhecimentos de eletrônica para criar a lógica que converte um número decimal BCD
+ * (Decimal Codificado em Binario) em uma combinação para o display de 7 segmentos.
+ * @param {string} numero número que será convertido para 7 bits
+ * @returns {array} retorna um array com 7 bits que combinados determinam o numero a ser exibido no display
+ */
 const converteDecimalPara7Seg = (numero) => {
-  const arr = decimalParaBinario(numero);
+  const arr = inteiroParaBinario(numero);
   let A = arr[3];
   let B = arr[2];
   let C = arr[1];
@@ -178,9 +237,15 @@ const converteDecimalPara7Seg = (numero) => {
 enviarButton.addEventListener('click', enviarHandler);
 novaPartidaButton.addEventListener('click', novaPartidaHandler);
 
-/* seletor: centena = 0, dezena = 1, unidade = 2*/
+/**
+ * Função que determina qual segmento deve mudar de cor para formar um número no display de 7 segmentos.
+ * @param {string} numero numero a ser renderizado no display de 7 segmentos
+ * @param {string} seletor determina qual o display de 7segmentos será alterado. Centena = 0, Dezena = 1, Unidade = 2
+ * @param {object} estado objeto com a informação da cor de cada segmento
+ */
 const renderizarNumero7Seg = (numero, seletor, estado) => {
   let numero7Seg = converteDecimalPara7Seg(numero);
+
   numero7Seg.forEach((segmento, index) => {
     if (segmento) {
       styleVariaveis.setProperty(
@@ -196,35 +261,36 @@ const renderizarNumero7Seg = (numero, seletor, estado) => {
   });
 };
 
-// Retirar todos os displays de 7 segmentos da tela
+/**
+ * Função que retira todos os displays de 7 segmentos da tela
+ */
 const retirarTodos7SegTela = () => {
   while (displayContainer.firstChild) {
     displayContainer.firstChild.remove();
   }
 };
 
-// Renderiza números na tela dependendo do tamanho
-const renderizarNumeroTela = (enteredNumber) => {
-  const arrNumeroDigitado = enteredNumber.split('');
+/**
+ * Função que determina quantos displays de 7 segmentos devem ser renderizados baseado no número digitado. O número digitado é transformado em um array e o tamanho do array determina se é um centena, dezena ou unidade
+ * @param {string} numeroDigitado número digitado pelo usuário
+ */
+const renderizarNumeroTela = (numeroDigitado) => {
+  const arrNumeroDigitado = numeroDigitado.split('');
 
-  // Se for uma centena
   if (arrNumeroDigitado.length === 3) {
     displayContainer.classList.remove('display1');
     displayContainer.classList.remove('display2');
     displayContainer.classList.add('display3');
+
     retirarTodos7SegTela();
 
-    // Adicionar display de 7 segmentos na tela
     displayContainer.insertAdjacentHTML('beforeend', HTML);
     displayContainer.insertAdjacentHTML('beforeend', HTML2);
     displayContainer.insertAdjacentHTML('beforeend', HTML3);
 
-    // Renderizar numero na tela
     arrNumeroDigitado.forEach((numero, index) => {
       renderizarNumero7Seg(numero, index, estado);
     });
-
-    // Se for uma dezena
   } else if (arrNumeroDigitado.length === 2) {
     displayContainer.classList.remove('display1');
     displayContainer.classList.add('display2');
@@ -232,16 +298,12 @@ const renderizarNumeroTela = (enteredNumber) => {
 
     retirarTodos7SegTela();
 
-    // Adicionar display de 7 segmentos na tela
     displayContainer.insertAdjacentHTML('beforeend', HTML);
     displayContainer.insertAdjacentHTML('beforeend', HTML2);
 
-    // Renderizar numero na tela
     arrNumeroDigitado.forEach((numero, index) => {
       renderizarNumero7Seg(numero, index, estado);
     });
-
-    // Se for uma unidade
   } else if (arrNumeroDigitado.length === 1) {
     displayContainer.classList.add('display1');
     displayContainer.classList.remove('display2');
@@ -249,42 +311,30 @@ const renderizarNumeroTela = (enteredNumber) => {
 
     retirarTodos7SegTela();
 
-    // Adicionar display de 7 segmentos na tela
     displayContainer.insertAdjacentHTML('beforeend', HTML);
 
-    // Renderizar numero na tela
     arrNumeroDigitado.forEach((numero, index) => {
       renderizarNumero7Seg(numero, index, estado);
     });
   }
 };
 
-// Compara o numero digitado com o numero secreto
-const compareToSecretNumber = (number) => {
-  mensagem.textContent = secretNumber > Number(number) ? 'É maior' : 'É menor';
-};
+/**
+ * Função que compara o número digitado com o número secreto
+ * @param {string} number Numero a ser comparado com o número secreto
+ */
+const comopararComNumeroSecreto = (number) => {
+  if (numeroSecreto === Number(number)) {
+    mudarEstadoJogo('rgba(50, 191, 0, 1)', 'pausado', 'ganhou');
 
-const checkSecretNumber = (number) => {
-  if (secretNumber === Number(number)) {
-    // Muda estado
-    estado.cor = 'rgba(50, 191, 0, 1)';
-    estado.sitacao = 'pausado';
-    estado.motivo = 'ganhou';
+    renderizarMensagem('Você acertou!!!!', estado.motivo, 'add');
 
-    // Adiciona o estado correct para a mensagem
-    mensagem.classList.add(estado.motivo);
-
-    // Altera texto da mensagem
-    mensagem.textContent = 'Você acertou!!!!';
-
-    // Renderiza o botão nova partida
     novaPartidaButton.classList.toggle('hidden');
 
-    // Desabilita formulário
     habilitarDesabilitaFormulario();
-  } else if (secretNumber !== number) {
-    // Compara o numero com o numero secreto
-    compareToSecretNumber(number);
+  } else if (numeroSecreto !== number) {
+    mensagem.textContent =
+      numeroSecreto > Number(number) ? 'É maior' : 'É menor';
   }
 };
 

@@ -52,8 +52,10 @@
       <form class="formBox">
         <input
           class="input pausado"
-          type="text"
+          type="number"
           placeholder="Digite o palpite"
+          oninput="validity.valid||(value='')"
+          max="300"
         />
         <button class="enviar_button pausado">Enviar</button>
       </form>
