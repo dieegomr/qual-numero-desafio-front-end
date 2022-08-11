@@ -46,7 +46,6 @@
   --form-border-color: #cfcfcf;
   --form-background-color: #ffffff;
   --form-button-color: linear-gradient(180deg, #ef6c00 0%, #c0661c 100%);
-  /* teste */
   --bigger-radius-small-screen: 8px;
   --smaller-radius--small-screen: 5px;
   --border-left-right-small-screen: 11.74px;
@@ -154,20 +153,6 @@ body {
   height: 135px;
 }
 
-/* .display-centena {
-  margin-right: var(--display-margin-small-screen);
-  margin-right: var(--display-margin-small-screen);
-}
-
-.display-dezena {
-  margin-left: var(--display-margin-small-screen);
-  margin-right: var(--display-margin-small-screen);
-}
-
-.display-unidade {
-  margin-left: var(--display-margin-small-screen);
-} */
-
 .segA {
   position: absolute;
   top: var(--seg-alinhamento-extremidade);
@@ -260,25 +245,7 @@ body {
   border-top-left-radius: var(--seg-angulo-centro);
   border-bottom-left-radius: var(--seg-angulo-vertice);
 }
-/* 
-.lineH {
-  position: absolute;
-  top: 2px;
-  left: 3px;
-  width: 200px;
-  height: 1px;
-  background-color: yellow;
-}
 
-.lineV {
-  position: absolute;
-  top: -50px;
-  left: 74.45px;
-  width: 1px;
-  height: 200px;
-  background-color: greenyellow;
-}
-*/
 .nova-partida_button {
   display: flex;
   align-items: center;
