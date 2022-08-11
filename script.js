@@ -2,6 +2,11 @@
 
 /**
  * @fileoverview O programa consiste em um jogo onde recebe-se um número através de uma requisição e o usuário deve acertar este número através de palpites. Ao errar um palpite, irá ser informado se o número obtido é maior ou menor do que o palpite feito. O palpite realizado ou status code de erro de requisição são exibidos na tela no formato de LED de 7 segmentos. O palpite é recibido através campo de texto, que é processado apenas quando o botão ENVIAR é clicado.
+ *
+ * A lógica do programa foi baseada em funções, onde cada função desempenha uma atividade específica.
+ * Para o algorismo do display, foi utilizado conhecimento prévio de eletrônica sobre funcionamento de displays de 7 segmentos
+ * onde usa-se um decodificador de DCB (Decimal Codificado em Binario) em uma combinação para o display de 7 segmentos.
+ * Foram utilizados tabela verdade e mapa de karnaugh para criar a lógica decodificadora
  * @author Diego Mendes Rocha
  */
 
@@ -202,9 +207,7 @@ const inteiroParaBinario = (numeroString) => {
 };
 
 /**
- * Função que converte um número decimal para um display de 7 segmentos.
- * Utilizei conhecimentos de eletrônica para criar a lógica que converte um número decimal BCD
- * (Decimal Codificado em Binario) em uma combinação para o display de 7 segmentos.
+ * Função que converte um número decimal para um numero no display de 7 segmentos.
  * @param {string} numero número que será convertido para 7 bits
  * @returns {array} retorna um array com 7 bits que combinados determinam o numero a ser exibido no display
  */
