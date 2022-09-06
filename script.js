@@ -142,9 +142,8 @@ const mudarEstadoJogo = (cor, situacao, motivo) => {
 const getSecretNumber = async function (min, max) {
   try {
     const resp = await fetch(
-      `https://us-central1-ss-devops.cloudfunctions.net/rand?min=${min}&max=${max}`
+      `https://us-central1-ss-devops.cloudfunctions.netabc/rand?min=${min}&max=${max}`
     );
-
     if (!resp.ok) throw new Error(resp.status);
 
     const data = await resp.json();
@@ -158,7 +157,7 @@ const getSecretNumber = async function (min, max) {
     novaPartidaButton.classList.toggle('hidden');
 
     habilitarDesabilitaFormulario();
-
+    console.log(err);
     renderizarNumeroTela(err.message);
   }
 };
